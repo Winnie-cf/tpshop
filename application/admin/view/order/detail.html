@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>  </title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__admin__/style/bootstrap.css" rel="stylesheet">
+    <link href="__admin__/style/font-awesome.css" rel="stylesheet">
+    <link href="__admin__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__admin__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__admin__/style/demo.css" rel="stylesheet">
+    <link href="__admin__/style/typicons.css" rel="stylesheet">
+    <link href="__admin__/style/animate.css" rel="stylesheet">
+    
+</head>
+<body>
+	<!-- 头部 -->
+    {include file="common/top"}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="common/left"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('Order/lst')}">订单管理</a>
+                    </li>
+                                        <li class="active">订单详情</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                
+                <table class="table table-hover">
+                                    <thead class="bordered-bottom bordered-blue">
+                                        <tr>
+                                            <th width="10%" style="text-align:right;">
+                                                名称
+                                            </th>
+                                            <th>
+                                                值
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               订单id:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.id}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               订单号:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.out_trade_no}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               下单用户:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.username}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               商品总额:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.goods_total_price}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               支付方式:
+                                            </td>
+                                            <td>
+                                                {if condition="$orderInfo['payment'] eq 1"}支付宝{elseif condition="$orderInfo['payment'] eq 2" /}微信{else /}余额{/if}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               配送方式:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.distribution}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               订单状态:
+                                            </td>
+                                            <td>
+                                                {if condition="$orderInfo['order_status'] eq 0"}未确认{elseif condition="$orderInfo['order_status'] eq 1" /}已确认{elseif condition="$orderInfo['order_status'] eq 2" /}申请退款{else /}退款成功{/if}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               支付状态:
+                                            </td>
+                                            <td>
+                                                {if condition="$orderInfo['pay_status'] eq 0"}未支付{else /}已支付{/if}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               发货状态:
+                                            </td>
+                                            <td>
+                                                {if condition="$orderInfo['post_status'] eq 0"}未发货{elseif condition="$orderInfo['post_status'] eq 1" /}已发货{else /}已收货{/if}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               运费:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.post_spent}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               收货人:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.name}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               手机:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.phone}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               省份:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.province}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               城市:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.city}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               区/县:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.country}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               详细地址:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.address}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               下单时间:
+                                            </td>
+                                            <td>
+                                                {$orderInfo.order_time|date="Y-m-d H:i:s",###}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right;">
+                                               订单商品:
+                                            </td>
+                                            <td>
+                                                商品列表
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>	
+	</div>
+
+	    <!--Basic Scripts-->
+    <script src="__admin__/style/jquery_002.js"></script>
+    <script src="__admin__/style/bootstrap.js"></script>
+    <script src="__admin__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__admin__/style/beyond.js"></script>
+    
+
+
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>  </title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__admin__/style/bootstrap.css" rel="stylesheet">
+    <link href="__admin__/style/font-awesome.css" rel="stylesheet">
+    <link href="__admin__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__admin__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__admin__/style/demo.css" rel="stylesheet">
+    <link href="__admin__/style/typicons.css" rel="stylesheet">
+    <link href="__admin__/style/animate.css" rel="stylesheet">
+    
+</head>
+<body>
+	<!-- 头部 -->
+    {include file="common/top"}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="common/left"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li class="active">商品管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<button type="button" tooltip="添加商品类型" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center" width="4%">ID</th>
+                                <th>名称</th>
+                                <th width="10%">编号</th>
+                                <th width="6%">缩略图</th>
+                                <th width="6%">市场价</th>
+                                <th width="6%">本店价</th>
+                                <th width="4%">上架</th>
+                                <th width="6%">栏目</th>
+                                <th width="6%">品牌</th>
+                                <th width="6%">类型</th>
+                                <th width="4%">重量</th>
+                                <th width="4%">单位</th>
+                                <th width="4%">库存量</th>
+                                <th class="text-center" width="16%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name="goodsRes" id="goods"}
+                                <tr>
+                                    <td align="center">{$goods.id}</td>
+                                    <td>{$goods.goods_name|cut_str=###,13}</td>
+                                    <td>{$goods.goods_code}</td>
+                                    <td>{if condition="$goods['sm_thumb'] neq ''"}<img src="__uploads__/{$goods.sm_thumb}" height="30">{else /}暂无主图{/if}</td>
+                                    <td>{$goods.markte_price}</td>
+                                    <td>{$goods.shop_price}</td>
+                                    <td>{if condition="$goods['on_sale'] eq 1"}已上架{else /}未上架{/if}</td>
+                                    <td>{$goods.cate_name}</td>
+                                    <td>{if condition="$goods['brand_name']"}{$goods.brand_name}{else /}未设置{/if}</td>
+                                    <td>{if condition="$goods['type_name']"}{$goods.type_name}{else /}未设置{/if}</td>
+                                    <td>{$goods.goods_weight}</td>
+                                    <td>{$goods.weight_unit}</td>
+                                    <td>{if condition="$goods['gn']"}{$goods.gn}{else/}0{/if}</td>
+                                    <td align="center">
+                                        <a href="{:url('product',array('id'=>$goods['id']))}" class="btn btn-darkorange btn-sm shiny">
+                                            <i class="fa fa-list"></i> 库存
+                                        </a>
+                                        <a href="{:url('edit',array('id'=>$goods['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$goods['id']))}')" class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/volist}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="padding-top:10px; text-align:right;">
+                {$goodsRes->render()}
+                </div>
+                <div>
+                	                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>	
+	</div>
+
+	    <!--Basic Scripts-->
+    <script src="__admin__/style/jquery_002.js"></script>
+    <script src="__admin__/style/bootstrap.js"></script>
+    <script src="__admin__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__admin__/style/beyond.js"></script>
+    
+
+
+</body></html>

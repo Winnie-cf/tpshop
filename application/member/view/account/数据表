@@ -1,0 +1,229 @@
+数据表
+
+
+栏目类型 cate_type 1:系统分类    2：帮助分类    3：网店帮助    4：网店信息    5：普通分类
+
+id  title  keywords  description   author  thumb   content   addtime   updatetime   status   cate_id
+
+
+配置  conf
+
+id  ename  cname  form_type  conf_type  values  value
+
+1   sitename   站点名称   表单类型   配置类型  可选项  默认值 
+
+分类  category
+
+id  cate_name  cate_img  sort  pid
+
+
+商品类型  type
+
+id  type_name
+
+商品属性  attr
+
+id  attr_name   attr_type   attr_values   type_id
+
+商品表   goods
+
+id  goods_name   goods_num  og_thumb  sm_thumb  mid_thumb  big_thumb  markte_price   shop_price  on_sale   category_id   brand_id 
+
+  type_id   goods_des   goods_weight   weight_unit
+
+
+会员级别  member_level
+
+id  level_name  bom_point   top_point   rate
+
+会员价格  member_price
+
+id  mprice   mlevel_id    goods_id
+
+商品相册  goods_photo
+
+id  goods_id   sm_photo  mid_photo  big_photo
+
+关联表
+
+id  title  type  url  img_url
+
+栏目广告  category_ad
+
+id  img_src   position   link_url   category_id
+
+用户主表 user
+
+id  username  password   email  mobile_phone  checked  email_checked   phone_checked
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    		foreach ($categoryRes[$k]['children'] as $k1 => $v1) {
+    			$cateTree= new Catetree();
+    		$sonIds=$cateTree->childrenids($v1['id'],db('category'));
+    		$sonIds[]=$v1['id'];
+    		//2、获取新品推荐位里符合条件的商品信息
+    		$_newRecposGoods=db('rec_item')->where(array('value_type'=>1,'recpos_id'=>3))->select();
+    		$newRecposGoods=array();
+    		foreach ($_newRecposGoods as $k2 => $v2) {
+    			$newRecposGoods[]=$v2['value_id'];
+    		}
+    		$map['category_id']=array('IN',$sonIds);
+    		$map['id']=array('IN',$newRecposGoods);
+    		// dump($map); 
+    		$categoryRes[$k]['children'][$k1]['2DGoods']=db('goods')->where($map)->limit(6)->order('id DESC')->select();
+    		}
+
+
+
+
+走进我们         公司简介  企业文化  公司团队  董事长致辞
+
+公司业务         影视投资  创业投资  夹层与信用  已投资业  证券与金融  私募股权
+
+新闻中心		 公司新闻  行业咨询
+
+联系我们		 联系方式
+
+
+ ①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+小程序商城数据表
+
+lg_banner
+
+id  img_src   link_url  type  description    sort
+
+
+专题
+
+lg_special
+
+id  spe_name  spe_img   
+
+
+
+
+
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+id  class  oid  uname  dhm  checknum  otime
+
+
+
+

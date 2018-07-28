@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>  </title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__admin__/style/bootstrap.css" rel="stylesheet">
+    <link href="__admin__/style/font-awesome.css" rel="stylesheet">
+    <link href="__admin__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__admin__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__admin__/style/demo.css" rel="stylesheet">
+    <link href="__admin__/style/typicons.css" rel="stylesheet">
+    <link href="__admin__/style/animate.css" rel="stylesheet">
+    
+</head>
+<body>
+	<!-- 头部 -->
+    {include file="common/top"}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="common/left"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li class="active">订单管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<button type="button" tooltip="添加订单" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('order/add')}'"> <i class="fa fa-plus"></i> Add
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center" width="4%">ID</th>
+                                <th class="text-center">订单编号</th>
+                                <th class="text-center">商品总价</th>
+                                <th class="text-center">支付状态</th>
+                                <th class="text-center">完成状态</th>
+                                <th class="text-center">发货状态</th>
+                                <th class="text-center">配送方式</th>
+                                <th class="text-center">支付方式</th>
+                                <th class="text-center">收货人</th>
+                                <th class="text-center">联系电话</th>
+                                <th class="text-center">下单用户</th>
+                                <th class="text-center">下单时间</th>
+                                <th class="text-center" width="16%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name="orderRes" id="order"}
+                                <tr>
+                                    <td align="center">{$order.id}</td>
+                                    <td align="center">{$order.out_trade_no}</td>
+                                    <td align="center">{$order.goods_total_price}</td>
+                                    <td align="center">{if condition="$order['pay_status'] eq 0"}未支付{else /}已支付{/if}</td>
+                                    <td align="center">{if condition="$order['order_status'] eq 0"}未确认{elseif condition="$order['order_status'] eq 1" /}已确认{elseif condition="$order['order_status'] eq 2" /}申请退款{else /}退款成功{/if}</td>
+                                    <td align="center">{if condition="$order['post_status'] eq 0"}未发货{elseif condition="$order['post_status'] eq 1" /}已发货{else /}已收货{/if}</td>
+                                    <td align="center">{$order.distribution}</td>
+                                    <td align="center">{if condition="$order['payment'] eq 1"}支付宝{elseif condition="$order['payment'] eq 2" /}微信{else /}余额{/if}</td>
+                                    <td align="center">{$order.name}</td>
+                                    <td align="center">{$order.phone}</td>
+                                    <td align="center">{$order.username}</td>
+                                    <td align="center">{$order.order_time|date="Y-m-d H:m:s",###}</td>
+                                    <td align="center">
+                                        <a href="{:url('orderGoods',array('id'=>$order['id']))}" class="btn btn-darkorange btn-sm shiny">
+                                            <i class="fa fa-list-ul"></i> 订单商品
+                                        </a>
+                                        <a href="{:url('edit',array('id'=>$order['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$order['id']))}')" class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/volist}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="padding-top:10px; text-align:right;">
+                {$orderRes->render()}
+                </div>
+                <div>
+                	                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>	
+	</div>
+
+	    <!--Basic Scripts-->
+    <script src="__admin__/style/jquery_002.js"></script>
+    <script src="__admin__/style/bootstrap.js"></script>
+    <script src="__admin__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__admin__/style/beyond.js"></script>
+    
+
+
+</body></html>
